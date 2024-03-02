@@ -2,7 +2,7 @@
 //ES5
 var http = require('node:http');
 
-var PORT = 9000;
+var PORT = 8080;
 
 //3000 puerto de React
 //4200 puerto de Angular
@@ -15,34 +15,17 @@ var hostname = '127.0.0.1';
 
 //creamos el server
 var server = http.createServer((request, response) => {
-
+    var date = new Date();
     response.statusCode = 200;
 
-    response.setHeader('Content-Type', 'text/plain');
+    response.setHeader('Content-Type', 'text/plain;charset=utf-8');
 
-    //GET
-    //POST
-    //PUT
-    //DELETE
-
-    //analiza la ruta
-
-    console.log(request);
-
-    console.log('===============================================================');
-    console.log(request.url);
-    console.log(request.method);
-    console.log(request.headers);
-    console.log(request.body);
-    console.log('===============================================================');
-
-    if(request.url === '/hola'){
-        response.end('Hola mundo');
-    }else if(request.url === '/adios'){
-        response.end('Adios mundo');
-    }else if(request.url === '/error'){
-        response.statusCode = 404;
-        response.end('Error');
+    if(date.getHours() >= 6 && date.getHours() < 12){
+        response.end("¡Buenos días!");
+    }else if(date.getHours() >= 13 && date.getHours() < 19){
+        response.end("¡Buenas tardes!");
+    }else if(date.getHours() >= 20 || date.getHours() < 5){
+        response.end("¡Buenas noches!");
     }else{
         response.end('Hola mundo');
     }
